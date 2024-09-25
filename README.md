@@ -10,4 +10,4 @@
 
 `fastapi dev carsharing.py`
 
-`git push origin refs/heads/serving-data:refs/heads/serving-data`
+`git push origin refs/heads/serving-data:refs/heads/structured-data-with-pydantic`
