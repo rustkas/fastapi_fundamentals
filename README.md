@@ -9,3 +9,5 @@
 `pip install -r requirements.txt`
 
 `fastapi dev carsharing.py`
+
+`git push origin refs/heads/serving-data:refs/heads/serving-data`
