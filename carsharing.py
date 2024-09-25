@@ -1,7 +1,7 @@
 import uvicorn
 from fastapi import FastAPI, HTTPException
 
-from schemas import load_db
+from schemas import Car, load_db, save_db
 
 app = FastAPI(title="Car Sharing")
 
@@ -26,8 +26,10 @@ def car_by_id(id: int) -> dict:
     else:
         raise HTTPException(status_code=404, detail=f"No car with id={id}.")
 
-
-
+@app.post("/app/cars")
+def add_car(car: Car):
+    db.append(car)
+    save_db(db)
 
 
 

@@ -10,4 +10,10 @@
 
 `fastapi dev carsharing.py`
 
+`git checkout -b structured-data-with-pydantic`
+`git commit -m "init"`
+`git push -u origin structured-data-with-pydantic`
+
+
+`git branch --set-upstream-to=origin/structured-data-with-pydantic`
 `git push origin refs/heads/serving-data:refs/heads/structured-data-with-pydantic`
