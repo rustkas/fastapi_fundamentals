@@ -1,7 +1,5 @@
-import uvicorn
 from fastapi import FastAPI, HTTPException
-
-from schemas import Car, load_db, save_db
+from schemas import CarInput, CarOutput, load_db, save_db, TripInput, TripOutput
 
 app = FastAPI(title="Car Sharing")
 
@@ -26,10 +24,26 @@ def car_by_id(id: int) -> dict:
     else:
         raise HTTPException(status_code=404, detail=f"No car with id={id}.")
 
-@app.post("/app/cars")
-def add_car(car: Car):
-    db.append(car)
+@app.post("/app/cars", response_model= CarOutput)
+def add_car(car: CarInput):
+    new_car = CarOutput(id = len(db)+1, size=car.size,doors=car.doors, fuel=car.fuel, transmission=car.transmission)
+    db.append(new_car)
     save_db(db)
+    return new_car
+
+@app.post("/app/cars/{car_id}/trips", response_model=TripOutput)
+def add_trip(car_id:int, trip: TripInput) -> TripOutput:    
+    matches = [car for car in db if car.id == car_id]
+    if matches:
+        car = matches[0]
+        new_trip = TripOutput(id=len(car.trips)+1,
+                             start=trip.start,end=trip.end,
+                             description=trip.description)
+        car.trips.add(new_trip)
+        save_db(db)
+        return new_trip
+    else:
+        raise HTTPException(status_code=404, detail=f"No car with id={id}")
 
 
 

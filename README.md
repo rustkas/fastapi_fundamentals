@@ -10,10 +10,16 @@
 
 `fastapi dev carsharing.py`
 
-`git checkout -b structured-data-with-pydantic`
+`git checkout -b structured-data-with-pydantic-http`
 `git commit -m "init"`
 `git push -u origin structured-data-with-pydantic`
+
+## Kill process
+`tasklist | findstr fastapi`
+`taskkill /F /PID 8336`
 
 
 `git branch --set-upstream-to=origin/structured-data-with-pydantic`
 `git push origin refs/heads/structured-data-with-pydantic:refs/heads/structured-data-with-pydantic`
+
+`git push -u origin HEAD:structured-data-with-pydantic`
