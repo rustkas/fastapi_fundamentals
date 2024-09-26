@@ -12,7 +12,7 @@
 
 `git checkout -b structured-data-with-pydantic-http`
 `git commit -m "init"`
-`git push -u origin structured-data-with-pydantic`
+`git push -u origin structured-data-with-pydantic-http`
 
 ## Kill process
 `tasklist | findstr fastapi`
