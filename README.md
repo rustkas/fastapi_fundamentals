@@ -21,7 +21,7 @@
 
 
 `git branch --set-upstream-to=origin/structured-data-with-pydantic`
-`git push origin refs/heads/structured-data-with-pydantic:refs/heads/structured-data-with-pydantic`
+`git push origin refs/heads/using-a-database:refs/heads/using-a-database`
 
 `git push -u origin HEAD:structured-data-with-pydantic`
 
