@@ -10,9 +10,10 @@
 
 `fastapi dev carsharing.py`
 
-`git checkout -b structured-data-with-pydantic-http`
+`git checkout -b using-a-database`
+`git add .`
 `git commit -m "init"`
-`git push -u origin structured-data-with-pydantic-http`
+`git push -u origin using-a-database`
 
 ## Kill process
 `tasklist | findstr fastapi`
@@ -23,3 +24,7 @@
 `git push origin refs/heads/structured-data-with-pydantic:refs/heads/structured-data-with-pydantic`
 
 `git push -u origin HEAD:structured-data-with-pydantic`
+
+
+## For Windows Git setting:
+`git config --global core.autocrlf true`

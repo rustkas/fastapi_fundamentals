@@ -1,47 +1,31 @@
 import json
-from pydantic import BaseModel
 from collections import OrderedDict
+from sqlmodel import Relationship, SQLModel, Field
 
-class TripInput(BaseModel):
+
+class TripInput(SQLModel):
     start: int
     end: int
     description: str
 
-class TripOutput(TripInput):
-    id: int
+class Trip(TripInput, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    car_id: int = Field(foreign_key="car.id")
+    car: "Car" = Relationship(back_populates="trips")
 
-class CarInput(BaseModel):
+class CarInput(SQLModel):
     size: str | None = 'xl'
     fuel: str | None = 'electric'
     doors: int
     transmission: str | None = 'auto'
 
-class CarOutput(CarInput):
-    id: int
-    trips: list[TripOutput] = []
+class Car(CarInput, table=True):
+    id: int | None = Field(primary_key=True, default=None)
 
-    class Config:
-        fields = {
-            'id': {'order': 1},
-            'size': {'order': 2},
-            'fuel': {'order': 3},
-            'doors': {'order': 4},
-            'transmission': {'order': 5},  
-    }
+
         
     def ordered_dump(self) -> OrderedDict:
         field_order = self.Config.fields
         return OrderedDict((field, getattr(self, field)) for field in sorted(field_order, key=lambda k: field_order[k]['order']))
 
 
-def load_db() -> list[CarOutput]:
-    """Load a list of Car objects from a JSON file"""
-    with open('cars.json') as f:
-         data = json.load(f)
-         if not data:
-             return []
-         return [CarOutput(**obj) for obj in data]
-
-def save_db(cars: list[CarInput]):
-    with open("cars.json", 'w') as f:
-        json.dump([car.ordered_dump() for car in cars], f, indent=4)
